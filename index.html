@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Volcano Explorer 3D</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <header class="navbar">
+
+        <div class="brand">
+            <span class="brand-icon">🌋</span>
+
+            <div>
+                <h1>Volcano Explorer</h1>
+                <small>Media Pembelajaran Interaktif</small>
+            </div>
+        </div>
+
+        <div class="nav-info">
+            <span>⭐ Nilai: <b id="score">0</b></span>
+
+            <button
+                type="button"
+                id="soundButton"
+                class="icon-button"
+                aria-label="Aktifkan suara">
+                🔊
+            </button>
+        </div>
+
+    </header>
+
+
+    <!-- ================= HOME ================= -->
+
+    <main>
+
+        <section id="homeSection" class="page active">
+
+            <div class="hero">
+
+                <div class="hero-content">
+
+                    <span class="badge">
+                        MEDIA PEMBELAJARAN INTERAKTIF
+                    </span>
+
+                    <h2>
+                        Kenali Dunia
+                        <span>Gunung Api</span>
+                    </h2>
+
+                    <p>
+                        Jelajahi struktur gunung api secara interaktif.
+                        Klik bagian gunung untuk mempelajari fungsi dan
+                        proses yang terjadi di dalamnya.
+                    </p>
+
+                    <div class="hero-buttons">
+
+                        <button
+                            type="button"
+                            class="btn btn-primary"
+                            id="startButton">
+                            🚀 Mulai Eksplorasi
+                        </button>
+
+                        <button
+                            type="button"
+                            class="btn btn-secondary"
+                            id="materialButton">
+                            📚 Pelajari Materi
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="hero-volcano">
+
+                    <div class="volcano-scene">
+
+                        <div class="volcano-smoke smoke-one"></div>
+                        <div class="volcano-smoke smoke-two"></div>
+
+                        <div class="volcano-mountain">
+
+                            <div class="lava-stream"></div>
+
+                            <div class="crater">
+                                🔥
+                            </div>
+
+                        </div>
+
+                        <div class="ground"></div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= EXPLORER ================= -->
+
+        <section id="explorerSection" class="page">
+
+            <div class="section-header">
+
+                <div>
+                    <span class="section-label">
+                        🔬 EKSPLORASI 3D
+                    </span>
+
+                    <h2>Struktur Gunung Api</h2>
+
+                    <p>
+                        Klik bagian gunung untuk melihat informasi.
+                    </p>
+                </div>
+
+                <button
+                    type="button"
+                    class="btn btn-secondary small-btn"
+                    id="backHomeButton">
+                    ← Menu
+                </button>
+
+            </div>
+
+
+            <div class="explorer-layout">
+
+                <!-- MODEL -->
+
+                <div class="model-card">
+
+                    <div class="model-toolbar">
+
+                        <span>MODEL 3D</span>
+
+                        <div>
+
+                            <button
+                                type="button"
+                                id="rotateLeft">
+                                ↶
+                            </button>
+
+                            <button
+                                type="button"
+                                id="resetView">
+                                ⟳
+                            </button>
+
+                            <button
+                                type="button"
+                                id="rotateRight">
+                                ↷
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        id="modelArea"
+                        class="model-area">
+
+                        <div
+                            id="volcanoModel"
+                            class="volcano-model">
+
+                            <!-- smoke -->
+
+                            <div class="model-smoke smoke-a"></div>
+                            <div class="model-smoke smoke-b"></div>
+
+                            <!-- mountain -->
+
+                            <button
+                                type="button"
+                                class="volcano-part crater-part"
+                                data-part="crater">
+
+                                <span class="crater-hole">
+                                    🔥
+                                </span>
+
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="volcano-part cone-part"
+                                data-part="cone">
+
+                                <span></span>
+
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="volcano-part lava-part"
+                                data-part="lava">
+
+                                <span></span>
+
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="volcano-part pipe-part"
+                                data-part="pipe">
+
+                                <span></span>
+
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="volcano-part chamber-part"
+                                data-part="chamber">
+
+                                <span>🔥</span>
+
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="volcano-part crust-part"
+                                data-part="crust">
+
+                                <span></span>
+
+                            </button>
+
+                        </div>
+
+
+                        <div class="model-instruction">
+                            👆 Klik bagian gunung
+                        </div>
+
+                    </div>
+
+
+                    <div class="model-controls">
+
+                        <button
+                            type="button"
+                            id="zoomOut">
+                            −
+                        </button>
+
+                        <span id="zoomValue">
+                            100%
+                        </span>
+
+                        <button
+                            type="button"
+                            id="zoomIn">
+                            +
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- INFORMATION -->
+
+                <aside class="info-card">
+
+                    <div class="info-icon" id="infoIcon">
+                        🌋
+                    </div>
+
+                    <span class="info-label">
+                        INFORMASI
+                    </span>
+
+                    <h3 id="infoTitle">
+                        Pilih Bagian Gunung
+                    </h3>
+
+                    <p id="infoDescription">
+                        Klik salah satu bagian pada model gunung api
+                        untuk melihat penjelasan.
+                    </p>
+
+
+                    <div
+                        id="infoFacts"
+                        class="info-facts">
+
+                        <div>
+                            <span>💡</span>
+                            <p>
+                                Eksplorasi setiap bagian untuk
+                                mendapatkan informasi.
+                            </p>
+                        </div>
+
+                    </div>
+
+                </aside>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= MATERI ================= -->
+
+        <section id="materialSection" class="page">
+
+            <div class="section-header">
+
+                <div>
+
+                    <span class="section-label">
+                        📚 MATERI PEMBELAJARAN
+                    </span>
+
+                    <h2>Mengenal Gunung Api</h2>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="btn btn-secondary small-btn"
+                    id="materialBackButton">
+                    ← Menu
+                </button>
+
+            </div>
+
+
+            <div class="material-grid">
+
+                <article class="material-card">
+
+                    <div class="material-number">
+                        01
+                    </div>
+
+                    <div class="material-icon">
+                        🌋
+                    </div>
+
+                    <h3>Apa Itu Gunung Api?</h3>
+
+                    <p>
+                        Gunung api merupakan bagian dari sistem
+                        geologi bumi yang dapat menjadi tempat
+                        keluarnya material dari dalam bumi ke
+                        permukaan.
+                    </p>
+
+                </article>
+
+
+                <article class="material-card">
+
+                    <div class="material-number">
+                        02
+                    </div>
+
+                    <div class="material-icon">
+                        🔥
+                    </div>
+
+                    <h3>Magma</h3>
+
+                    <p>
+                        Magma adalah material batuan dalam keadaan
+                        sangat panas yang berada di bawah permukaan
+                        bumi.
+                    </p>
+
+                </article>
+
+
+                <article class="material-card">
+
+                    <div class="material-number">
+                        03
+                    </div>
+
+                    <div class="material-icon">
+                        💨
+                    </div>
+
+                    <h3>Erupsi</h3>
+
+                    <p>
+                        Erupsi merupakan proses keluarnya material
+                        vulkanik seperti lava, abu, gas, dan material
+                        lainnya dari gunung api.
+                    </p>
+
+                </article>
+
+
+                <article class="material-card">
+
+                    <div class="material-number">
+                        04
+                    </div>
+
+                    <div class="material-icon">
+                        🌍
+                    </div>
+
+                    <h3>Kerak Bumi</h3>
+
+                    <p>
+                        Kerak bumi merupakan lapisan terluar bumi
+                        yang menjadi tempat berlangsungnya berbagai
+                        aktivitas geologi.
+                    </p>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= ERUPTION ================= -->
+
+        <section id="eruptionSection" class="page">
+
+            <div class="section-header">
+
+                <div>
+
+                    <span class="section-label">
+                        🔥 ANIMASI
+                    </span>
+
+                    <h2>Simulasi Erupsi</h2>
+
+                    <p>
+                        Amati simulasi sederhana proses erupsi.
+                    </p>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="btn btn-secondary small-btn"
+                    id="eruptionBackButton">
+                    ← Menu
+                </button>
+
+            </div>
+
+
+            <div class="eruption-card">
+
+                <div
+                    id="eruptionScene"
+                    class="eruption-scene">
+
+                    <div class="eruption-smoke e-smoke-one"></div>
+                    <div class="eruption-smoke e-smoke-two"></div>
+                    <div class="eruption-smoke e-smoke-three"></div>
+
+                    <div class="eruption-mountain">
+
+                        <div class="eruption-fire">
+                            🔥
+                        </div>
+
+                    </div>
+
+                    <div id="particles"></div>
+
+                </div>
+
+
+                <div class="eruption-controls">
+
+                    <button
+                        type="button"
+                        class="btn btn-primary"
+                        id="eruptionButton">
+                        🌋 Mulai Erupsi
+                    </button>
+
+                    <p id="eruptionStatus">
+                        Simulasi belum dimulai.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= QUIZ ================= -->
+
+        <section id="quizSection" class="page">
+
+            <div class="quiz-wrapper">
+
+                <div class="quiz-header">
+
+                    <span class="section-label">
+                        🧠 EVALUASI
+                    </span>
+
+                    <h2>
+                        Uji Pengetahuanmu
+                    </h2>
+
+                    <p>
+                        Jawab pertanyaan berikut.
+                    </p>
+
+                    <div class="quiz-progress">
+
+                        <div
+                            id="progressBar"
+                            class="progress-bar">
+                        </div>
+
+                    </div>
+
+                    <span id="questionNumber">
+                        Pertanyaan 1 dari 5
+                    </span>
+
+                </div>
+
+
+                <div class="quiz-card">
+
+                    <div class="question-icon">
+                        ❓
+                    </div>
+
+                    <h3 id="questionText">
+                        Pertanyaan
+                    </h3>
+
+                    <div
+                        id="answerContainer"
+                        class="answer-container">
+                    </div>
+
+                    <div
+                        id="quizFeedback"
+                        class="quiz-feedback">
+                    </div>
+
+                    <button
+                        type="button"
+                        id="nextQuestion"
+                        class="btn btn-primary next-btn"
+                        disabled>
+                        Pertanyaan Berikutnya →
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= RESULT ================= -->
+
+        <section id="resultSection" class="page">
+
+            <div class="result-card">
+
+                <div class="result-trophy">
+                    🏆
+                </div>
+
+                <span class="section-label">
+                    HASIL EVALUASI
+                </span>
+
+                <h2>
+                    Pembelajaran Selesai!
+                </h2>
+
+                <p>
+                    Berikut hasil kuis kamu.
+                </p>
+
+                <div class="score-circle">
+
+                    <span id="finalScore">
+                        0
+                    </span>
+
+                    <small>
+                        / 100
+                    </small>
+
+                </div>
+
+                <p id="resultMessage">
+                    Terus belajar dan eksplorasi kembali
+                    materi gunung api.
+                </p>
+
+                <div class="result-buttons">
+
+                    <button
+                        type="button"
+                        class="btn btn-primary"
+                        id="retryQuiz">
+                        🔄 Ulangi Kuis
+                    </button>
+
+                    <button
+                        type="button"
+                        class="btn btn-secondary"
+                        id="resultHome">
+                        🏠 Menu Utama
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <p>
+            🌋 Volcano Explorer 3D
+            <span>•</span>
+            Media Pembelajaran Interaktif
+        </p>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
